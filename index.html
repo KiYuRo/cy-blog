@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cy Official Blog | レガシー脱出から年収720万への軌跡</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Chart.js for beautiful career graph -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    },
+                    colors: {
+                        lightBg: '#F8FAFC',
+                        brandGreen: '#10B981',
+                        brandBlue: '#3B82F6',
+                        brandCyan: '#06B6D4',
+                        slateDark: '#0F172A'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.05) 0px, transparent 40%);
+            background-attachment: fixed;
+        }
+        .glow-btn {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .glow-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px -10px rgba(16, 185, 129, 0.4);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 font-sans antialiased min-h-screen">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-md shadow-brandGreen/10">
+                    <span class="text-white font-extrabold text-lg tracking-wider">Cy</span>
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight text-slateDark">Cy's Blog</span>
+                    <span class="text-xs block text-brandGreen font-bold tracking-widest uppercase">Data Engineer Hack</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <a href="#story" class="hover:text-brandGreen transition-colors">V字回復ストーリー</a>
+                <a href="#concept" class="hover:text-brandGreen transition-colors">発信の2大ピラー</a>
+                <a href="#diagnose" class="hover:text-brandGreen transition-colors">市場価値診断</a>
+                <a href="#articles" class="hover:text-brandGreen transition-colors">最新記事</a>
+            </nav>
+
+            <div>
+                <a href="#diagnose" class="glow-btn bg-slateDark hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md flex items-center gap-2">
+                    <span>市場価値を診断する</span>
+                    <i data-lucide="shield-alert" class="w-4 h-4 text-brandGreen"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+        <!-- Background Grid Effect -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f080_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f080_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full text-xs font-bold bg-brandGreen/10 text-brandGreen border border-brandGreen/20 mb-6">
+                <span class="w-2 h-2 rounded-full bg-brandGreen animate-pulse"></span>
+                現役データエンジニアのリアルな生存戦略
+            </span>
+
+            <!-- Modified leading (line-height) class from leading-tight to leading-normal/relaxed for spacing -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-normal sm:leading-normal md:leading-relaxed text-slateDark mb-6">
+                あえて<span class="text-rose-500 underline decoration-rose-400 decoration-wavy underline-offset-8">年収を下げて</span>転職し、<br class="hidden sm:inline">
+                <span class="bg-gradient-to-r from-brandGreen to-brandCyan bg-clip-text text-transparent">モダン技術で720万円</span>へ。<br>
+                リアルな「稼ぎ方＆増やし方」
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-slate-500 font-normal leading-relaxed mb-10">
+                新卒時代のレガシー環境への強い危機感から、身を削ってスキルへ投資。<br>
+                一時的なダウンから一気に掴み取った「モダンスキル」と「資産形成の知恵」の全貌を、忖度なしで発信します。
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#story" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brandGreen to-brandCyan text-white font-bold hover:opacity-95 transition-all text-center flex items-center justify-center gap-2 shadow-lg shadow-brandGreen/10">
+                    <span>ストーリーを見る（年収V字推移）</span>
+                    <i data-lucide="arrow-down-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#diagnose" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold transition-all text-center flex items-center justify-center gap-2 shadow-sm">
+                    <i data-lucide="help-circle" class="w-5 h-5 text-amber-500"></i>
+                    <span>レガシー環境 診断テスト</span>
+                </a>
+            </div>
+
+            <!-- Stats Mini Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-16">
+                <div class="bg-white border border-slate-200/80 p-5 rounded-2xl shadow-sm text-left">
+                    <span class="text-xs text-slate-400 block font-bold mb-1">現役職</span>
+                    <span class="text-base sm:text-lg font-bold text-slateDark flex items-center gap-1.5">
+                        <i data-lucide="database" class="w-4 h-4 text-brandCyan"></i>
+                        データエンジニア
+                    </span>
+                </div>
+                <div class="bg-white border border-slate-200/80 p-5 rounded-2xl shadow-sm text-left">
+                    <span class="text-xs text-slate-400 block font-bold mb-1">現在の年収</span>
+                    <span class="text-base sm:text-lg font-bold text-emerald-600 flex items-center gap-1.5">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-brandGreen"></i>
+                        720万円
+                    </span>
+                </div>
+                <div class="bg-white border border-slate-200/80 p-5 rounded-2xl shadow-sm text-left">
+                    <span class="text-xs text-slate-400 block font-bold mb-1">キャリア転機</span>
+                    <span class="text-base sm:text-lg font-bold text-rose-500 flex items-center gap-1.5">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        あえてのダウン転職
+                    </span>
+                </div>
+                <div class="bg-white border border-slate-200/80 p-5 rounded-2xl shadow-sm text-left">
+                    <span class="text-xs text-slate-400 block font-bold mb-1">ブログテーマ</span>
+                    <span class="text-base sm:text-lg font-bold text-slate-700 flex items-center gap-1.5">
+                        <i data-lucide="coins" class="w-4 h-4 text-amber-500"></i>
+                        稼ぐ力 × 増やす仕組み
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile & Career V-Shaped Chart Section -->
+    <section id="story" class="py-20 border-t border-slate-200 bg-white relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold text-brandGreen tracking-widest block mb-1">THE V-SHAPE PATH</span>
+                <h2 class="text-3xl font-extrabold tracking-tight text-slateDark mb-4">
+                    一時的なダウンは「未来のブースター」だった
+                </h2>
+                <p class="text-slate-500">
+                    新卒時の500万円から、あえて一時的に460万円まで下げてモダンスキルを獲得。<br>
+                    その決断があったからこそ、一気に720万円へとV字回復を遂げることができました。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+                <!-- Left: Chart & Narrative Card -->
+                <div class="lg:col-span-7 bg-slate-50 border border-slate-200/60 p-6 rounded-3xl shadow-md">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-brandGreen">Income Transition</span>
+                            <h3 class="text-lg font-bold text-slateDark mt-1">実録：Cyの年収遷移</h3>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-slate-200 text-xs text-slate-600 font-semibold border border-slate-300">単位: 万円</span>
+                    </div>
+
+                    <!-- Chart canvas wrapper -->
+                    <div class="relative w-full h-80">
+                        <canvas id="careerChart"></canvas>
+                    </div>
+
+                    <div class="mt-6 p-4 rounded-xl bg-white border border-slate-200 flex gap-3">
+                        <i data-lucide="lightbulb" class="w-6 h-6 text-amber-500 shrink-0"></i>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            <strong class="text-slateDark font-bold">Cy's Voice:</strong> 「あのまま新卒時代のレガシーな環境に居続けていたら、技術が陳腐化して自分の市場価値は暴落していたはず。目先の40万を捨てて、10年使えるスキルを仕込みに行ったからこそ今があります。」
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Timeline Details -->
+                <div class="lg:col-span-5 flex flex-col space-y-6">
+                    <!-- Step 1 -->
+                    <div class="relative pl-8 border-l-2 border-slate-200 pb-1">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 border-4 border-white"></div>
+                        <span class="text-xs font-bold text-slate-400">1社目: 新卒時代</span>
+                        <div class="flex justify-between items-center mt-1">
+                            <h4 class="text-lg font-bold text-slateDark">年収 500万円</h4>
+                            <span class="px-2 py-0.5 rounded text-xs bg-rose-100 text-rose-600 font-bold border border-rose-200">危機感「強」</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">
+                            堅牢だが古いメインフレーム主体の閉塞的な環境。「この会社以外で通用しないエンジニアになってしまう」と強い危機感を募らせていました。
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative pl-8 border-l-2 border-brandCyan pb-1">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brandCyan border-4 border-white animate-pulse"></div>
+                        <span class="text-xs font-bold text-brandCyan">2社目: あえてのダウン転職</span>
+                        <div class="flex justify-between items-center mt-1">
+                            <h4 class="text-lg font-bold text-slateDark">年収 460万円</h4>
+                            <span class="px-2 py-0.5 rounded text-xs bg-cyan-50 text-brandCyan font-bold border border-cyan-200">スキル投資期</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">
+                            給与は一時的に下がったものの、モダンなデータエンジニアリング（クラウド、DWH、分散処理）を実戦配備できる環境を選択。将来への最強の種まき期間。
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative pl-8 border-l-2 border-brandBlue pb-1">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brandBlue border-4 border-white"></div>
+                        <span class="text-xs font-bold text-brandBlue">3社目: 高還元SESへ</span>
+                        <div class="flex justify-between items-center mt-1">
+                            <h4 class="text-lg font-bold text-slateDark">年収 600万円</h4>
+                            <span class="px-2 py-0.5 rounded text-xs bg-blue-50 text-brandBlue font-bold border border-blue-200">市場価値開花</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">
+                            習得したモダンスキルが評価され、高還元SESへの参入が容易に。身に付けた技術が、年収という目に見える数字にダイレクトに反映され始めました。
+                        </p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="relative pl-8 pb-1">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brandGreen border-4 border-white shadow-md"></div>
+                        <span class="text-xs font-bold text-brandGreen">4社目: 現在（本業最大化）</span>
+                        <div class="flex justify-between items-center mt-1">
+                            <h4 class="text-xl font-black text-brandGreen">年収 720万円</h4>
+                            <span class="px-2.5 py-0.5 rounded text-xs bg-brandGreen/10 text-brandGreen border border-brandGreen/20 font-bold">大回収・達成</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-1.5 leading-relaxed font-normal">
+                            単価連動型のスキームを活用。データ基盤構築、パイプラインの近代化支援など、希少なデータエンジニアスキルを活用し、本業の単価を最大限レバレッジした納得の年収設計です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two Core Pillars (Concept Section) -->
+    <section id="concept" class="py-20 border-t border-slate-200 bg-slate-50 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-brandGreen">Blog Core Value</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slateDark mt-2">
+                    このブログが発信する「2大生存戦略」
+                </h2>
+                <p class="text-slate-500 mt-4 text-sm sm:text-base leading-relaxed">
+                    多くのITメディアが教えない、現役データエンジニアだからこそのリアルな数字・体験のみをお届けします。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Pillar 1 -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 hover:border-brandGreen/40 hover:shadow-lg transition-all group duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brandGreen/10 border border-brandGreen/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
+                            <i data-lucide="trending-up" class="w-7 h-7 text-brandGreen"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slateDark mb-4">
+                            1. 稼ぐ力 <span class="text-xs font-normal text-slate-500 block mt-1">（転職・モダンキャリア開発）</span>
+                        </h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                            実務におけるレガシー脱却の方法から、データエンジニアの市場価値分析、市場で最も評価されるスキル・ポートフォリオの作り方、SESや高還元モデルを活かした最速の年収UP手順まで、生々しい転職メソッドを展開します。
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brandGreen shrink-0 mt-0.5"></i>
+                                <span>レガシーエンジニアがモダン化するためのロードマップ</span>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brandGreen shrink-0 mt-0.5"></i>
+                                <span>データエンジニアが高年収オファーを引き出す交渉術</span>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brandGreen shrink-0 mt-0.5"></i>
+                                <span>SES・フリーランスにおける単価連動の最大化戦略</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 border-t border-slate-100 flex justify-between items-center">
+                        <span class="text-xs text-brandGreen font-semibold tracking-wider">CAREER & JOB CHANGE</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 hover:border-brandCyan/40 hover:shadow-lg transition-all group duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brandCyan/10 border border-brandCyan/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
+                            <i data-lucide="wallet" class="w-7 h-7 text-brandCyan"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slateDark mb-4">
+                            2. 増やす仕組み <span class="text-xs font-normal text-slate-500 block mt-1">（資産運用・マネーハック）</span>
+                        </h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                            本業で最大化したキャッシュを「さらに働かせる」仕組み。投資信託・高配当株・インデックス投資などを組み合わせたシンプルなポートフォリオ設計や、エンジニアならではのツール・ロジックに基づくスマートな家計ハックを紹介。
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brandCyan shrink-0 mt-0.5"></i>
+                                <span>本業収入から最大効率で入金力を捻出する家計ロジック</span>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brandCyan shrink-0 mt-0.5"></i>
+                                <span>30代から淡々と仕込む、高配当・投信の自動化システム</span>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brandCyan shrink-0 mt-0.5"></i>
+                                <span>エンジニア特化型税制・経費管理ハックの教科書</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 border-t border-slate-100 flex justify-between items-center">
+                        <span class="text-xs text-brandCyan font-semibold tracking-wider">MONEY HACKS & WEALTH</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Diagnosis Tool -->
+    <section id="diagnose" class="py-20 border-t border-slate-200 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="bg-gradient-to-r from-slate-50 to-slate-100/50 border border-slate-200 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-sm">
+                <!-- Glowing decoration inside card -->
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brandGreen/5 rounded-full blur-3xl"></div>
+
+                <div class="relative z-10">
+                    <div class="text-center mb-10">
+                        <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-700 border border-amber-200 px-3 py-1 rounded-full text-xs font-bold mb-4">
+                            <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>
+                            現状分析：2分でチェック！
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-black text-slateDark">
+                            あなたの「レガシー環境危機度」診断
+                        </h3>
+                        <p class="text-slate-500 mt-2 text-sm">
+                            Cyさんが直面した危機感と、現在のあなた自身の市場価値のギャップを判定します。
+                        </p>
+                    </div>
+
+                    <!-- Question Container -->
+                    <div id="diagnose-box" class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200">
+                            <span id="q-number" class="text-xs text-brandGreen font-bold uppercase tracking-wider block mb-2 font-bold">第 1 問 / 全 5 問</span>
+                            <h4 id="q-text" class="text-lg font-bold text-slateDark mb-6">自分の使っている技術・言語が10年以上前のものであり、他社への汎用性が低いと感じる。</h4>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <button onclick="handleAnswer(30)" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                                    <span>非常に強く当てはまる</span>
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                                </button>
+                                <button onclick="handleAnswer(20)" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                                    <span>多少は当てはまる</span>
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                                </button>
+                                <button onclick="handleAnswer(10)" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                                    <span>あまり当てはまらない</span>
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                                </button>
+                                <button onclick="handleAnswer(0)" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                                    <span>全く当てはまらない</span>
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result Box (Hidden initially) -->
+                    <div id="result-box" class="hidden space-y-6">
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 text-center">
+                            <div class="inline-flex p-3 rounded-full bg-rose-50 border border-rose-100 mb-4" id="result-icon-container">
+                                <i data-lucide="shield-alert" class="w-10 h-10 text-rose-500" id="result-icon"></i>
+                            </div>
+                            <h4 class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">あなたのレガシー環境危機度</h4>
+                            <div class="text-4xl font-black text-rose-500 mb-4" id="result-score">危険度 85%</div>
+
+                            <h5 class="text-lg font-bold text-slateDark mb-2" id="result-title">今すぐモダンスタックへの投資を始めるべき！</h5>
+                            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto mb-6" id="result-desc">
+                                新卒時のCyさんと同じく、社外で通用しにくいレガシーな技術に囲まれています。早めのスキル切り替えや「年収ダウン」をも厭わない環境の変化が、今後の年収V字を創る一番の近道になるはずです。
+                            </p>
+
+                            <div class="flex flex-col sm:flex-row justify-center gap-3">
+                                <button onclick="resetDiagnose()" class="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-sm font-semibold transition-all text-slate-700">
+                                    もう一度診断する
+                                </button>
+                                <a href="#story" class="px-5 py-3 rounded-xl bg-gradient-to-r from-brandGreen to-brandCyan text-white text-sm font-bold transition-all hover:opacity-95">
+                                    CyのV字回復戦略を詳しく読む
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulated Latest Articles Section -->
+    <section id="articles" class="py-20 border-t border-slate-200 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-xs font-bold text-brandGreen uppercase tracking-widest">Latest Insights</span>
+                    <h2 class="text-3xl font-extrabold text-slateDark mt-2">
+                        今、読むべき注目のコンテンツ
+                    </h2>
+                </div>
+                <div class="mt-4 md:mt-0 flex gap-2">
+                    <button id="tab-all" onclick="filterArticles('all')" class="px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm transition-all">
+                        すべて
+                    </button>
+                    <button id="tab-career" onclick="filterArticles('career')" class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-500 border border-slate-200 hover:text-slate-700 transition-all">
+                        稼ぐ力 (Career)
+                    </button>
+                    <button id="tab-money" onclick="filterArticles('money')" class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-500 border border-slate-200 hover:text-slate-700 transition-all">
+                        増やす仕組み (Money)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="articles-container">
+                <!-- Article 1 -->
+                <div class="article-card bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between" data-category="career">
+                    <div>
+                        <div class="relative h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-rose-500/5 to-brandGreen/5"></div>
+                            <div class="text-center relative z-10">
+                                <span class="text-xs font-bold text-rose-500 bg-rose-50 px-2 py-1 rounded border border-rose-100">キャリア戦略</span>
+                                <h4 class="text-base font-bold text-slateDark mt-3 leading-snug px-2">「目先の給与40万」を捨てて手に入れた10年先も稼げるモダンスキルの本質</h4>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs text-brandGreen font-bold tracking-wider uppercase block mb-1">1. 稼ぐ力</span>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                新卒からレガシー脱出を試みた、あの転職活動の裏舞台。なぜあえて年収を下げてまでモダン環境を熱望したのか？
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-100 flex justify-between items-center mt-auto">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> 5 min read
+                        </span>
+                        <a href="javascript:void(0)" onclick="showComingSoonToast()" class="text-sm font-bold text-brandGreen flex items-center gap-1 hover:underline">
+                            記事を読む
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="article-card bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between" data-category="money">
+                    <div>
+                        <div class="relative h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-brandCyan/5 to-brandBlue/5"></div>
+                            <div class="text-center relative z-10">
+                                <span class="text-xs font-bold text-brandCyan bg-cyan-50 px-2 py-1 rounded border border-cyan-100">マネーハック</span>
+                                <h4 class="text-base font-bold text-slateDark mt-3 leading-snug px-2">データエンジニア流：無駄のない徹底した家計データベース＆自動投資設計</h4>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs text-brandCyan font-bold tracking-wider uppercase block mb-1">2. 増やす仕組み</span>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                スプレッドシートやAPIを活用した家計見える化、本業所得を最大効率でインデックスや高配当に分散させるルーティン。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-100 flex justify-between items-center mt-auto">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min read
+                        </span>
+                        <a href="javascript:void(0)" onclick="showComingSoonToast()" class="text-sm font-bold text-brandCyan flex items-center gap-1 hover:underline">
+                            記事を読む
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="article-card bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between" data-category="career">
+                    <div>
+                        <div class="relative h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-brandGreen/5 to-brandCyan/5"></div>
+                            <div class="text-center relative z-10">
+                                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded border border-emerald-100">高還元SES</span>
+                                <h4 class="text-base font-bold text-slateDark mt-3 leading-snug px-2">単価連動で手取りを最大化。年収720万円までの「評価」の勝ち取り方</h4>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs text-brandGreen font-bold tracking-wider uppercase block mb-1">1. 稼ぐ力</span>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                自分の稼ぎ＝会社売上に直結する。単価連動という仕組みを徹底活用し、本業の市場価値を高水準で年収に反映するロードマップ。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-100 flex justify-between items-center mt-auto">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> 6 min read
+                        </span>
+                        <a href="javascript:void(0)" onclick="showComingSoonToast()" class="text-sm font-bold text-brandGreen flex items-center gap-1 hover:underline">
+                            記事を読む
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulated Toast / Modal for 'Coming soon' instead of subscription -->
+    <div id="toast" class="hidden fixed bottom-6 right-6 z-50 max-w-sm bg-slateDark text-white p-4 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700/50">
+        <div class="w-8 h-8 rounded-full bg-brandGreen/20 flex items-center justify-center text-brandGreen">
+            <i data-lucide="info" class="w-4 h-4"></i>
+        </div>
+        <div>
+            <h5 class="text-xs font-bold">記事詳細ページは準備中です</h5>
+            <p class="text-[10px] text-slate-300 mt-0.5">本ブログ記事は近日公開予定です。お楽しみに！</p>
+        </div>
+        <button onclick="closeToast()" class="text-slate-400 hover:text-white ml-auto">
+            <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+    </div>
+
+    <!-- Final Message & Transition to Future Blog Themes -->
+    <section class="py-20 border-t border-slate-200 bg-white text-center relative">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <h3 class="text-2xl font-black text-slateDark mb-6">
+                一人の現役エンジニアとしてのリアルを発信していきます
+            </h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-2xl mx-auto mb-8">
+                目先の給料にこだわりすぎず、本当に欲しかった「モダンテック環境」を選び取ったことで、年収720万円への飛躍が叶いました。<br>
+                このブログを通して、エンジニア自身の力でキャリアと資産を最大化するハックを嘘偽りなく展開していきます。どうぞよろしくお願いします！
+            </p>
+            <div class="inline-flex items-center gap-2 py-1.5 px-3.5 rounded-full text-xs font-semibold bg-slate-50 text-slate-600 border border-slate-200">
+                <span class="w-2 h-2 rounded-full bg-brandCyan"></span>
+                次回予告：データエンジニアが選ぶ「本当に効果のあったIT特化キャリア相談ルート」
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="border-t border-slate-200 bg-white text-slate-400 py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-sm">
+                        <span class="text-white font-extrabold text-sm tracking-wider">Cy</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-700 block leading-tight">Cy's Blog</span>
+                        <span class="text-[10px] text-slate-400 tracking-wider">MODERN CAREER & WEALTH DESIGN</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 text-xs sm:text-sm font-semibold">
+                    <a href="#story" class="hover:text-slate-600 transition-colors">V字回復ストーリー</a>
+                    <a href="#concept" class="hover:text-slate-600 transition-colors">コンセプト</a>
+                    <a href="#diagnose" class="hover:text-slate-600 transition-colors">市場価値診断</a>
+                    <a href="#articles" class="hover:text-slate-600 transition-colors">記事</a>
+                </div>
+
+                <p class="text-xs text-slate-400">
+                    &copy; 2026 Cy Official Blog. All Rights Reserved.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic & Script block -->
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // ------------------------------------
+        // ChartJS Implementation (Optimized for Light Mode)
+        // ------------------------------------
+        const ctx = document.getElementById('careerChart').getContext('2d');
+        const careerChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1社目 (新卒)', '2社目 (あえてダウン)', '3社目 (高還元SES)', '現在 (単価連動)'],
+                datasets: [{
+                    label: '年収推移 (万)',
+                    data: [500, 460, 600, 720],
+                    borderColor: '#10B981', // brandGreen
+                    borderWidth: 4,
+                    backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                    fill: true,
+                    tension: 0.35,
+                    pointBackgroundColor: '#06B6D4', // brandCyan
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 3,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#0F172A',
+                        titleColor: '#fff',
+                        bodyColor: '#10B981',
+                        bodyFont: {
+                            weight: 'bold'
+                        },
+                        borderColor: '#E2E8F0',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return `年収: ${context.parsed.y} 万円`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(226, 232, 240, 0.8)' // slate-200
+                        },
+                        ticks: {
+                            color: '#475569', // slate-600
+                            font: {
+                                size: 11,
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        min: 400,
+                        max: 800,
+                        grid: {
+                            color: 'rgba(226, 232, 240, 0.8)' // slate-200
+                        },
+                        ticks: {
+                            color: '#475569', // slate-600
+                            font: {
+                                weight: 'bold'
+                            },
+                            stepSize: 100,
+                            callback: function(value) {
+                                return value + '万';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // ------------------------------------
+        // Interactive Career Diagnostics Logic
+        // ------------------------------------
+        const questions = [
+            {
+                q: "1. 自分の使っているメイン技術や開発フローが10年以上前のレガシーなもので、他社での汎用性が低い。",
+                scores: [30, 20, 10, 0] // 非常に強く, 多少は, あまり, 全く
+            },
+            {
+                q: "2. 周りのエンジニアのスキル学習に対するモチベーションが低く、新しい技術を導入しづらい空気がある。",
+                scores: [20, 15, 5, 0]
+            },
+            {
+                q: "3. 現状の給与にそこまで大きな不満はないが、「この会社でしか生き残れないエンジニアになる」不安がある。",
+                scores: [25, 15, 5, 0]
+            },
+            {
+                q: "4. クラウド（AWS / GCP）、DWH（Snowflake / BigQuery）、モダンなCI/CDなどを実務で触ったことがない。",
+                scores: [15, 10, 5, 0]
+            },
+            {
+                q: "5. 自身の市場価値（他社からどのようなオファーが来るか、単価がどれくらいか）を具体的に把握できていない。",
+                scores: [10, 8, 3, 0]
+            }
+        ];
+
+        let currentQIndex = 0;
+        let totalScore = 0;
+
+        function handleAnswer(score) {
+            totalScore += score;
+            currentQIndex++;
+
+            const qBox = document.getElementById('diagnose-box');
+
+            if (currentQIndex < questions.length) {
+                // Prepare next question
+                const currentQ = questions[currentQIndex];
+
+                qBox.innerHTML = `
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 transition-all duration-300">
+                        <span id="q-number" class="text-xs text-brandGreen font-bold uppercase tracking-wider block mb-2 font-bold">第 ${currentQIndex + 1} 問 / 全 ${questions.length} 問</span>
+                        <h4 id="q-text" class="text-lg font-bold text-slateDark mb-6">${currentQ.q}</h4>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button onclick="handleAnswer(${currentQ.scores[0]})" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                                <span>非常に強く当てはまる</span>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                            <button onclick="handleAnswer(${currentQ.scores[1]})" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                                <span>多少は当てはまる</span>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                            <button onclick="handleAnswer(${currentQ.scores[2]})" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                                <span>あまり当てはまらない</span>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                            <button onclick="handleAnswer(${currentQ.scores[3]})" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                                <span>全く当てはまらない</span>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                lucide.createIcons();
+            } else {
+                showDiagnosticsResult();
+            }
+        }
+
+        function showDiagnosticsResult() {
+            document.getElementById('diagnose-box').classList.add('hidden');
+            const resultBox = document.getElementById('result-box');
+            resultBox.classList.remove('hidden');
+
+            const scoreText = document.getElementById('result-score');
+            const titleText = document.getElementById('result-title');
+            const descText = document.getElementById('result-desc');
+            const icon = document.getElementById('result-icon');
+            const iconContainer = document.getElementById('result-icon-container');
+
+            // Set result details based on totalScore (Max score: 100)
+            scoreText.innerText = `危険度 ${totalScore}%`;
+
+            if (totalScore >= 75) {
+                titleText.innerText = "【赤信号】限界のレガシー環境！即座のスキル投資が必要です";
+                descText.innerText = "新卒時のCyさんとまったく同じ極限状態です。このまま放置すると5年後のキャリア選択肢が致命的に狭まるリスクがあります。今すぐにでもモダン領域のデータ基盤やモダンクラウドへの自主学習や環境切り替えの決断が必要です。Cyさんのブログで紹介する『ダウン転職から這い上がるロードマップ』をぜひ参考にしてください。";
+                icon.className = "w-10 h-10 text-rose-500";
+                iconContainer.className = "inline-flex p-3 rounded-full bg-rose-50 border border-rose-100 mb-4 animate-bounce";
+            } else if (totalScore >= 45) {
+                titleText.innerText = "【黄信号】要注意！キャリアが少しずつ固まりつつあります";
+                descText.innerText = "日常の業務で大きな不満はないかもしれませんが、エンジニア市場の潮流から少しずつ遅れをとっている兆候があります。土台のスキルをモダン化する時間的な投資や、高還元SESなどによる『単価連動の仕組み』に興味を持つことが、一歩抜け出すための秘訣です。";
+                icon.className = "w-10 h-10 text-amber-500";
+                iconContainer.className = "inline-flex p-3 rounded-full bg-amber-50 border border-amber-100 mb-4";
+            } else {
+                titleText.innerText = "【青信号】良好なキャリア環境。さらなる『増やす仕組み』へ";
+                descText.innerText = "一定の自由度があり、モダン環境にも理解のあるキャリアをお持ちです。ここから年収720万円を超える高みへ進むためには、単価連動で収入そのものをハックするか、本業で得た潤沢な軍資金を『マネーハック』で増やす仕組みに回すステップに移行するのが最適です。";
+                icon.className = "w-10 h-10 text-brandGreen";
+                iconContainer.className = "inline-flex p-3 rounded-full bg-emerald-50 border border-emerald-100 mb-4";
+            }
+            lucide.createIcons();
+        }
+
+        function resetDiagnose() {
+            currentQIndex = 0;
+            totalScore = 0;
+            document.getElementById('result-box').classList.add('hidden');
+            const qBox = document.getElementById('diagnose-box');
+            qBox.classList.remove('hidden');
+
+            // Re-render first question
+            const currentQ = questions[0];
+            qBox.innerHTML = `
+                <div class="bg-white rounded-2xl p-6 border border-slate-200">
+                    <span id="q-number" class="text-xs text-brandGreen font-bold uppercase tracking-wider block mb-2 font-bold">第 1 問 / 全 ${questions.length} 問</span>
+                    <h4 id="q-text" class="text-lg font-bold text-slateDark mb-6">${currentQ.q}</h4>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button onclick="handleAnswer(${currentQ.scores[0]})" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                            <span>非常に強く当てはまる</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                        </button>
+                        <button onclick="handleAnswer(${currentQ.scores[1]})" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                            <span>多少は当てはまる</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                        </button>
+                        <button onclick="handleAnswer(${currentQ.scores[2]})" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                            <span>あまり当てはまらない</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                        </button>
+                        <button onclick="handleAnswer(${currentQ.scores[3]})" class="w-full py-4 px-5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-brandGreen transition-all text-left flex items-center justify-between text-sm sm:text-base font-medium text-slate-700">
+                            <span>全く当てはまらない</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // ------------------------------------
+        // Article Filtering Logic
+        // ------------------------------------
+        function filterArticles(category) {
+            const cards = document.querySelectorAll('.article-card');
+
+            // Toggle active tabs colors
+            const btnAll = document.getElementById('tab-all');
+            const btnCareer = document.getElementById('tab-career');
+            const btnMoney = document.getElementById('tab-money');
+
+            // Reset active styles
+            [btnAll, btnCareer, btnMoney].forEach(btn => {
+                btn.className = "px-4 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-500 border border-slate-200 hover:text-slate-700 transition-all";
+            });
+
+            if (category === 'all') {
+                btnAll.className = "px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm transition-all";
+            } else if (category === 'career') {
+                btnCareer.className = "px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm transition-all";
+            } else if (category === 'money') {
+                btnMoney.className = "px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm transition-all";
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // ------------------------------------
+        // Toast logic (instead of subscribe popup)
+        // ------------------------------------
+        function showComingSoonToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        function closeToast() {
+            document.getElementById('toast').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
