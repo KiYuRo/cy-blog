@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おすすめサービス一覧 | Cy's Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../config.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'Noto Sans JP', 'sans-serif'] }, colors: { brandGreen: '#10B981', brandCyan: '#06B6D4', slateDark: '#0F172A' } } } }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="font-bold text-lg text-slateDark">Cy's Blog</a>
+            <nav class="flex gap-6 text-sm font-bold text-slate-600">
+                <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-brandGreen">ホーム</a>
+                <a href="https://kiyuro.github.io/cy-blog/reviews/" data-config-href="BASE_URL/reviews/" class="text-brandGreen">おすすめサービス</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-16">
+        <div class="mb-12">
+            <h1 class="text-3xl font-black text-slateDark mb-4">おすすめサービス・ツール一覧</h1>
+            <p class="text-slate-500">私が実際に利用し、キャリア形成や資産運用において「これは有益だ」と判断したサービス・ツールの詳細レビュー記事一覧です。</p>
+        </div>
+
+        <div class="space-y-4">
+            <!-- 記事リンク集 -->
+            <a href="#" class="block bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-brandGreen transition-all group">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-brandGreen uppercase">転職・キャリア</span>
+                        <h2 class="text-lg font-bold text-slateDark mt-1 group-hover:text-brandGreen">type転職エージェントを実際に使った体験談と攻略法</h2>
+                    </div>
+                    <i data-lucide="chevron-right" class="text-slate-300"></i>
+                </div>
+            </a>
+
+            <a href="#" class="block bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-brandGreen transition-all group">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-brandCyan uppercase">資産運用・投資</span>
+                        <h2 class="text-lg font-bold text-slateDark mt-1 group-hover:text-brandCyan">データエンジニアにおすすめの自動資産管理ツール比較</h2>
+                    </div>
+                    <i data-lucide="chevron-right" class="text-slate-300"></i>
+                </div>
+            </a>
+
+            <a href="#" class="block bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-brandGreen transition-all group">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-brandGreen uppercase">学習・生産性</span>
+                        <h2 class="text-lg font-bold text-slateDark mt-1 group-hover:text-brandGreen">エンジニアの学習効率を最大化するツール選定の基準</h2>
+                    </div>
+                    <i data-lucide="chevron-right" class="text-slate-300"></i>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof CONFIG !== 'undefined' && CONFIG.BASE_URL) {
+                document.querySelectorAll('[data-config-href]').forEach(el => {
+                    const path = el.getAttribute('data-config-href');
+                    if (path === 'BASE_URL') el.href = CONFIG.BASE_URL;
+                    else if (path.includes('reviews/')) el.href = `${CONFIG.BASE_URL}/reviews/`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

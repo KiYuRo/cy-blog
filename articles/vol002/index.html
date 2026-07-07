@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【第2回】「この会社でしか生きられない」という恐怖。僕が感じたキャリアの危機感 | Cy's Blog</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- config.jsの読み込み（2つ上のルート階層から取得） -->
+    <script src="../../config.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    },
+                    colors: {
+                        lightBg: '#F8FAFC',
+                        brandGreen: '#10B981',
+                        brandBlue: '#3B82F6',
+                        brandCyan: '#06B6D4',
+                        slateDark: '#0F172A'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.03) 0px, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.03) 0px, transparent 40%);
+            background-attachment: fixed;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-md shadow-brandGreen/10 group-hover:scale-105 transition-transform">
+                    <span class="text-white font-extrabold text-lg tracking-wider">Cy</span>
+                </div>
+                <div class="hidden xs:block">
+                    <span class="font-bold text-lg tracking-tight text-slateDark group-hover:text-brandGreen transition-colors">Cy's Blog</span>
+                    <span class="text-xs block text-brandGreen font-bold tracking-widest uppercase">Data Engineer Hack</span>
+                </div>
+            </a>
+
+            <!-- Dynamic Navigation Links -->
+            <nav class="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm font-bold text-slate-600">
+                <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>ホーム</span>
+                </a>
+                <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>記事一覧</span>
+                </a>
+                <a href="https://kiyuro.github.io/cy-blog/reviews/" data-config-href="BASE_URL/reviews/" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>おすすめサービス</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Article Hero Section -->
+    <main class="flex-grow py-12 md:py-20">
+        <article class="max-w-3xl mx-auto px-4 sm:px-6">
+
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-6">
+                <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-brandGreen transition-colors">ホーム</a>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="hover:text-brandGreen transition-colors">連載記事</a>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-slate-600 truncate">【第2回】「この会社でしか生きられない」恐怖</span>
+            </nav>
+
+            <!-- Header of the post -->
+            <header class="mb-10">
+                <div class="flex items-center gap-2.5 mb-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-600 border border-rose-100">
+                        キャリア戦略
+                    </span>
+                    <span class="text-xs font-semibold text-slate-400 flex items-center gap-1">
+                        <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                        2026.07.10
+                    </span>
+                    <span class="text-xs font-semibold text-slate-400 flex items-center gap-1">
+                        <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                        読了時間: 約3分
+                    </span>
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slateDark leading-normal sm:leading-relaxed mb-6">
+                    【第2回】「この会社でしか生きられない」という恐怖。僕が感じたキャリアの危機感
+                </h1>
+
+                <!-- Author details -->
+                <div class="flex items-center gap-3 p-4 rounded-2xl bg-slate-100/60 border border-slate-200/50">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center font-black text-white text-sm shadow">
+                        Cy
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold text-slateDark flex items-center gap-1">
+                            Cy (サイ)
+                            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-brandGreen/10 text-brandGreen border border-brandGreen/20">著者</span>
+                        </div>
+                        <div class="text-xs text-slate-500">30代現役データエンジニア / 本業年収720万円V字回復達成者</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <div class="prose prose-slate max-w-none text-slate-700 leading-loose text-base sm:text-lg space-y-8 font-normal">
+
+                <p>
+                    前回の記事では、新卒時に「年収500万円」「データ分析・機械学習モデル開発」という、一見すれば恵まれていて非常にトレンド感のあるポジションからエンジニア生活をスタートしたお話をしました。
+                </p>
+
+                <p>
+                    同期からも羨ましがられ、私自身も「この環境なら市場価値の高いエンジニアになれる」と疑っていませんでした。
+                </p>
+
+                <p>
+                    しかし、配属されて一歩深く現場に入り込むと、そこに潜んでいたインフラ環境は、トレンドとは180度かけ離れた<strong class="text-slateDark border-b-2 border-brandGreen/40 px-1">「完全なレガシー」</strong>だったのです。
+                </p>
+
+                <hr class="border-slate-200 my-10" />
+
+                <h2 class="text-2xl font-bold text-slateDark flex items-center gap-2 mt-10 mb-6">
+                    <span class="w-1.5 h-6 rounded bg-brandGreen"></span>
+                    20代後半で感じた、外の世界とのギャップ
+                </h2>
+
+                <p>
+                    私がアサインされたデータ分析チームで待っていたのは、次のような泥臭く、そして思考停止を強いられるインフラ環境でした。
+                </p>
+
+                <!-- Legacy Environment Points Card -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 my-8 space-y-4">
+                    <h3 class="text-base font-extrabold text-slateDark flex items-center gap-2 mb-2">
+                        <i data-lucide="database-backup" class="w-5 h-5 text-rose-500"></i>
+                        直面した「完全オンプレミス」の実態
+                    </h3>
+                    <ul class="space-y-4 text-sm sm:text-base">
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-xs shrink-0 mt-1">1</span>
+                            <div>
+                                <strong class="text-slateDark block">完全オンプレミスの古い物理サーバー</strong>
+                                <p class="text-slate-500 text-sm mt-1">容量追加やサーバー増強をするためには何枚もの「稟議書」を回さねばならず、ただデータを1テラ追加するだけでも数ヶ月待ちという足の遅さでした。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-xs shrink-0 mt-1">2</span>
+                            <div>
+                                <strong class="text-slateDark block">属人化され、誰も全貌を把握していない秘伝のタレのスクリプト</strong>
+                                <p class="text-slate-500 text-sm mt-1">歴代の先輩方が場当たり的に継ぎ足してきたシェルスクリプト。コメントもなく、エラーが起きたらどこに影響するかが誰にもわからない、文字通りのスパゲッティコードがデータ集計の心臓部でした。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-xs shrink-0 mt-1">3</span>
+                            <div>
+                                <strong class="text-slateDark block">毎日エラーを吐き散らすバッチ処理の「監視と延命措置」</strong>
+                                <p class="text-slate-500 text-sm mt-1">深夜にエラーアラートが鳴り響き、朝出社しては「とりあえず再起動してやり過ごす」という泥臭いバッチの延命措置が日常。新しい技術の導入はおろか、現状維持だけで1日が終わっていく日々でした。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <p>
+                    「これは何かおかしい」と思い始めた私は、20代後半になった頃、ふと外の世界に目を向けました。
+                </p>
+
+                <p>
+                    そこで目にした世の中の求人情報やテックブログ、勉強会のトレンドは、オンプレミスではなく、完全にクラウドへと移行していたのです。
+                </p>
+
+                <!-- Tech Contrast Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+                    <div class="p-5 rounded-2xl border border-slate-200 bg-rose-50/20">
+                        <span class="text-xs font-bold text-rose-500 block mb-1">社内のレガシー環境</span>
+                        <span class="text-lg font-bold text-slateDark block mb-2">現状維持と社内ルール</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            物理サーバーの維持、秘伝のシェルスクリプト、手作業の監視、社内独自の古い社内稟議。
+                        </p>
+                    </div>
+                    <div class="p-5 rounded-2xl border border-slate-200 bg-emerald-50/20">
+                        <span class="text-xs font-bold text-emerald-600 block mb-1">外のデータエンジニア求人</span>
+                        <span class="text-lg font-bold text-slateDark block mb-2">クラウド・モダンスタック</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            AWS/GCPを用いたインフラ設計、SnowflakeやBigQuery、dbtによるモダンデータパイプライン。
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    世間の求める「データエンジニア」の定義は、完全にアップデートされていました。
+                </p>
+
+                <p>
+                    彼らが求めるのは、稟議書の書き方や古い物理マシンのリブート技術ではなく、<strong>クラウド上でスケーラブルなデータ流通基盤を構築・自動運用できるスキル</strong>でした。
+                </p>
+
+                <hr class="border-slate-200 my-10" />
+
+                <h2 class="text-2xl font-bold text-slateDark flex items-center gap-2 mt-10 mb-6">
+                    <span class="w-1.5 h-6 rounded bg-brandGreen"></span>
+                    「外に出た瞬間に自分の市場価値はゼロになる」
+                </h2>
+
+                <p>
+                    その事実に気づいた瞬間、背筋に冷たいものが走ったのを今でも覚えています。
+                </p>
+
+                <!-- Pullquote box -->
+                <div class="my-8 p-6 md:p-8 rounded-2xl bg-emerald-50/50 border-l-4 border-brandGreen shadow-sm">
+                    <p class="text-base sm:text-lg font-semibold text-slateDark leading-relaxed italic">
+                        「この会社にあと5年いたら、会社の外に出た瞬間に自分の市場価値は完全にゼロになる。」
+                    </p>
+                </div>
+
+                <p>
+                    社内独自の稟議を通すのが上手くなり、誰も読めない秘伝のタレシェルスクリプトを「なんとなく扱える」だけの存在。それは、その一社の中でしか生きられない「人質」になるようなものです。
+                </p>
+
+                <p>
+                    社内ルールに詳しくなっていく自分自身への慢心と、外の世界の圧倒的な技術トレンドのスピードから置いていかれる強烈な恐怖。
+                </p>
+
+                <p>
+                    手元にある「年収500万円」という安定したぬるま湯。これを失ってでも、外で闘える本当の『稼ぐ力』を身につけなければ、30代、40代になったときに詰む。
+                </p>
+
+                <p>
+                    この強烈なキャリアの危機感こそが、私に<strong>「あえて年収を一時的に下げてでも、環境をモダン化する」という、極端とも思える転職の決断</strong>をさせるに至りました。
+                </p>
+
+                <p class="text-lg font-bold text-slateDark mt-8">
+                    次回、私がキャリアをV字回復させるための最初の跳躍台として選んだ、「年収を下げてでもスキルを取りに行ったダウン転職」の生々しいリアルをお話しします。
+                </p>
+
+            </div>
+
+            <!-- Footer Area inside article (Next article Only) -->
+            <footer class="mt-16 pt-8 border-t border-slate-200">
+                <div class="flex justify-end items-center mb-8">
+                    <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="text-xs font-bold text-brandGreen hover:underline flex items-center gap-1">
+                        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                        すべての連載記事一覧
+                    </a>
+                </div>
+
+                <!-- Next Article Preview Card -->
+                <div class="p-6 rounded-2xl bg-gradient-to-tr from-slate-50 to-slate-100/50 border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                    <div class="space-y-1.5">
+                        <span class="text-xs font-bold text-brandGreen tracking-widest block uppercase">Next up: 第3回</span>
+                        <h4 class="text-base sm:text-lg font-bold text-slateDark">「あえて年収を下げて飛び込んだ、モダンスキル獲得 of 現場」</h4>
+                        <p class="text-xs sm:text-sm text-slate-500">年収を40万下げ、データ基盤をクラウド化するスタートアップへ。その決断が最強のブースターとなった理由。</p>
+                    </div>
+                    <button onclick="showComingSoonToast('第3回')" class="px-5 py-3 rounded-xl bg-slateDark hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shrink-0 transition-all flex items-center gap-1">
+                        <span>第3回を読む</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-brandCyan"></i>
+                    </button>
+                </div>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- Simulated Toast / Modal -->
+    <div id="toast" class="hidden fixed bottom-6 right-6 z-50 max-w-sm bg-slateDark text-white p-4 rounded-2xl shadow-2xl border border-slate-700/50 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-brandGreen/20 flex items-center justify-center text-brandGreen">
+            <i data-lucide="info" class="w-4 h-4"></i>
+        </div>
+        <div>
+            <h5 class="text-xs font-bold" id="toast-title">第3回は鋭意執筆中です</h5>
+            <p class="text-[10px] text-slate-300 mt-0.5">近日中にアップデート、公開予定です。お楽しみに！</p>
+        </div>
+        <button onclick="closeToast()" class="text-slate-400 hover:text-white ml-auto">
+            <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="border-t border-slate-200 bg-white text-slate-400 py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-sm">
+                        <span class="text-white font-extrabold text-sm tracking-wider">Cy</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-700 block leading-tight">Cy's Blog</span>
+                        <span class="text-[10px] text-slate-400 tracking-wider">MODERN CAREER & WEALTH DESIGN</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 text-xs sm:text-sm font-semibold">
+                    <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-slate-600 transition-colors">ホーム</a>
+                    <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="hover:text-slate-600 transition-colors">記事一覧</a>
+                    <a href="https://kiyuro.github.io/cy-blog/reviews/" data-config-href="BASE_URL/reviews/" class="hover:text-slate-600 transition-colors">おすすめサービス</a>
+                </div>
+
+                <p class="text-xs text-slate-400">
+                    &copy; 2026 Cy Official Blog. All Rights Reserved.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // config.jsから動的にベースURLを注入する処理
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof CONFIG !== 'undefined' && CONFIG.BASE_URL) {
+                const elements = document.querySelectorAll('[data-config-href]');
+                elements.forEach(el => {
+                    const pathType = el.getAttribute('data-config-href');
+
+                    if (pathType === 'BASE_URL') {
+                        el.href = CONFIG.BASE_URL;
+                    } else if (pathType.startsWith('BASE_URL/')) {
+                        const subPath = pathType.replace('BASE_URL/', '');
+                        el.href = `${CONFIG.BASE_URL}/${subPath}`;
+                    } else if (pathType.startsWith('BASE_URL#')) {
+                        const hash = pathType.split('#')[1];
+                        el.href = `${CONFIG.BASE_URL}#${hash}`;
+                    }
+                });
+            } else {
+                console.warn('config.js が見つからないか、CONFIG変数が定義されていません。デフォルトリンクを使用します。');
+            }
+        });
+
+        // Toast logic
+        let toastTimeout;
+        function showComingSoonToast(volName) {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toast-title');
+
+            toastTitle.innerText = `${volName}は鋭意執筆中です`;
+            toast.classList.remove('hidden');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        function closeToast() {
+            document.getElementById('toast').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
