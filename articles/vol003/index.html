@@ -20,15 +20,35 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
+    <!-- Navigation Bar -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="https://kiyuro.github.io/cy-blog" class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-md">
-                    <span class="text-white font-extrabold text-lg">Cy</span>
+            <!-- Logo -->
+            <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-md shadow-brandGreen/10 group-hover:scale-105 transition-transform">
+                    <span class="text-white font-extrabold text-lg tracking-wider">Cy</span>
                 </div>
-                <span class="font-bold text-lg text-slateDark">Cy's Blog</span>
+                <div>
+                    <span class="font-bold text-lg tracking-tight text-slateDark group-hover:text-brandGreen transition-colors">Cy's Blog</span>
+                    <span class="text-xs block text-brandGreen font-bold tracking-widest uppercase">Data Engineer Hack</span>
+                </div>
             </a>
-            <a href="https://kiyuro.github.io/cy-blog" class="text-sm font-semibold text-slate-600 hover:text-brandGreen">ホームへ戻る</a>
+
+            <!-- Dynamic Navigation Links -->
+            <nav class="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm font-bold text-slate-600">
+                <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>ホーム</span>
+                </a>
+                <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>記事一覧</span>
+                </a>
+                <a href="https://kiyuro.github.io/cy-blog/reviews/" data-config-href="BASE_URL/reviews/" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>おすすめサービス</span>
+                </a>
+            </nav>
         </div>
     </header>
 
@@ -70,8 +90,33 @@
         </article>
     </main>
 
-    <footer class="border-t border-slate-200 bg-white py-12 text-center text-slate-400 text-xs">
-        &copy; 2026 Cy Official Blog.
+        <!-- Footer Section -->
+    <footer class="border-t border-slate-200 bg-white text-slate-400 py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-sm">
+                        <span class="text-white font-extrabold text-sm tracking-wider">Cy</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-700 block leading-tight">Cy's Blog</span>
+                        <span class="text-[10px] text-slate-400 tracking-wider">MODERN CAREER & WEALTH DESIGN</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 text-xs sm:text-sm font-semibold">
+                    <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-slate-600 transition-colors">ホーム</a>
+                    <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="hover:text-slate-600 transition-colors">記事一覧</a>
+                    <a href="https://kiyuro.github.io/cy-blog/reviews/" data-config-href="BASE_URL/reviews/" class="hover:text-slate-600 transition-colors">おすすめサービス</a>
+                </div>
+
+                <p class="text-xs text-slate-400">
+                    &copy; 2026 Cy Official Blog. All Rights Reserved.
+                </p>
+
+            </div>
+        </div>
     </footer>
 
     <script>lucide.createIcons();</script>

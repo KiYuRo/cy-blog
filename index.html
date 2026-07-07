@@ -69,15 +69,16 @@
     <!-- Navigation Bar -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-md shadow-brandGreen/10">
+             <!-- Logo -->
+            <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-md shadow-brandGreen/10 group-hover:scale-105 transition-transform">
                     <span class="text-white font-extrabold text-lg tracking-wider">Cy</span>
                 </div>
                 <div>
-                    <span class="font-bold text-lg tracking-tight text-slateDark">Cy's Blog</span>
+                    <span class="font-bold text-lg tracking-tight text-slateDark group-hover:text-brandGreen transition-colors">Cy's Blog</span>
                     <span class="text-xs block text-brandGreen font-bold tracking-widest uppercase">Data Engineer Hack</span>
                 </div>
-            </div>
+            </a>
 
             <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
                 <a href="#story" class="hover:text-brandGreen transition-colors">V字回復ストーリー</a>
@@ -88,7 +89,7 @@
 
             <div>
                 <a href="#diagnose" class="glow-btn bg-slateDark hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md flex items-center gap-2">
-                    <span>市場価値を診断する</span>
+                    <span>レガシー環境危機度診断</span>
                     <i data-lucide="shield-alert" class="w-4 h-4 text-brandGreen"></i>
                 </a>
             </div>
@@ -246,7 +247,7 @@
                     <!-- Step 4 -->
                     <div class="relative pl-8 pb-1">
                         <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brandGreen border-4 border-white shadow-md"></div>
-                        <span class="text-xs font-bold text-brandGreen">4社目: 現在（本業最大化）</span>
+                        <span class="text-xs font-bold text-brandGreen">3社目: 現在（単価アップ後）</span>
                         <div class="flex justify-between items-center mt-1">
                             <h4 class="text-xl font-black text-brandGreen">年収 720万円</h4>
                             <span class="px-2.5 py-0.5 rounded text-xs bg-brandGreen/10 text-brandGreen border border-brandGreen/20 font-bold">大回収・達成</span>
@@ -467,7 +468,7 @@
                         <span class="text-xs text-slate-400 flex items-center gap-1">
                             <i data-lucide="clock" class="w-3.5 h-3.5"></i> 5 min read
                         </span>
-                        <a href="javascript:void(0)" onclick="showComingSoonToast()" class="text-sm font-bold text-brandGreen flex items-center gap-1 hover:underline">
+                        <a href="https://kiyuro.github.io/cy-blog/articles/vol001" data-config-href="BASE_URL"  class="text-sm font-bold text-brandGreen flex items-center gap-1 hover:underline">
                             記事を読む
                             <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </a>
@@ -580,10 +581,9 @@
                 </div>
 
                 <div class="flex gap-6 text-xs sm:text-sm font-semibold">
-                    <a href="#story" class="hover:text-slate-600 transition-colors">V字回復ストーリー</a>
-                    <a href="#concept" class="hover:text-slate-600 transition-colors">コンセプト</a>
-                    <a href="#diagnose" class="hover:text-slate-600 transition-colors">市場価値診断</a>
-                    <a href="#articles" class="hover:text-slate-600 transition-colors">記事</a>
+                    <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-slate-600 transition-colors">ホーム</a>
+                    <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="hover:text-slate-600 transition-colors">記事一覧</a>
+                    <a href="https://kiyuro.github.io/cy-blog/reviews/" data-config-href="BASE_URL/reviews/" class="hover:text-slate-600 transition-colors">おすすめサービス</a>
                 </div>
 
                 <p class="text-xs text-slate-400">

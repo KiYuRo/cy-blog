@@ -61,6 +61,7 @@
     <!-- Navigation Bar -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Logo -->
             <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="flex items-center space-x-3 group">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-md shadow-brandGreen/10 group-hover:scale-105 transition-transform">
                     <span class="text-white font-extrabold text-lg tracking-wider">Cy</span>
@@ -71,19 +72,21 @@
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+            <!-- Dynamic Navigation Links -->
+            <nav class="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm font-bold text-slate-600">
                 <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-brandGreen transition-colors flex items-center gap-1">
                     <i data-lucide="home" class="w-4 h-4"></i>
-                    ホームへ戻る
+                    <span>ホーム</span>
+                </a>
+                <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>記事一覧</span>
+                </a>
+                <a href="https://kiyuro.github.io/cy-blog/reviews/" data-config-href="BASE_URL/reviews/" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>おすすめサービス</span>
                 </a>
             </nav>
-
-            <div>
-                <a href="https://kiyuro.github.io/cy-blog#diagnose" data-config-href="BASE_URL#diagnose" class="bg-slateDark hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md flex items-center gap-2">
-                    <span>市場価値を診断する</span>
-                    <i data-lucide="shield-alert" class="w-4 h-4 text-brandGreen"></i>
-                </a>
-            </div>
         </div>
     </header>
 
@@ -254,8 +257,8 @@
 
                 <div class="flex gap-6 text-xs sm:text-sm font-semibold">
                     <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-slate-600 transition-colors">ホーム</a>
-                    <a href="https://kiyuro.github.io/cy-blog#story" data-config-href="BASE_URL#story" class="hover:text-slate-600 transition-colors">V字回復ストーリー</a>
-                    <a href="https://kiyuro.github.io/cy-blog#diagnose" data-config-href="BASE_URL#diagnose" class="hover:text-slate-600 transition-colors">市場価値診断</a>
+                    <a href="https://kiyuro.github.io/cy-blog/articles/" data-config-href="BASE_URL/articles/" class="hover:text-slate-600 transition-colors">記事一覧</a>
+                    <a href="https://kiyuro.github.io/cy-blog/reviews/" data-config-href="BASE_URL/reviews/" class="hover:text-slate-600 transition-colors">おすすめサービス</a>
                 </div>
 
                 <p class="text-xs text-slate-400">
