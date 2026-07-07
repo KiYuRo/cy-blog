@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>連載記事一覧 | Cy's Blog - Modern Career & Wealth Design</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- config.jsの読み込み（1つ上のルート階層から取得） -->
+    <script src="../config.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    },
+                    colors: {
+                        lightBg: '#F8FAFC',
+                        brandGreen: '#10B981',
+                        brandBlue: '#3B82F6',
+                        brandCyan: '#06B6D4',
+                        slateDark: '#0F172A'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.03) 0px, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.03) 0px, transparent 40%);
+            background-attachment: fixed;
+        }
+        .glow-btn {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .glow-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px -10px rgba(16, 185, 129, 0.4);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-md shadow-brandGreen/10 group-hover:scale-105 transition-transform">
+                    <span class="text-white font-extrabold text-lg tracking-wider">Cy</span>
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight text-slateDark group-hover:text-brandGreen transition-colors">Cy's Blog</span>
+                    <span class="text-xs block text-brandGreen font-bold tracking-widest uppercase">Data Engineer Hack</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-brandGreen transition-colors flex items-center gap-1">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    ホームへ戻る
+                </a>
+            </nav>
+
+            <div>
+                <a href="https://kiyuro.github.io/cy-blog#diagnose" data-config-href="BASE_URL#diagnose" class="glow-btn bg-slateDark hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md flex items-center gap-2">
+                    <span>市場価値を診断する</span>
+                    <i data-lucide="shield-alert" class="w-4 h-4 text-brandGreen"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-12 md:py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-8">
+                <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-brandGreen transition-colors">ホーム</a>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-slate-600">連載記事一覧</span>
+            </nav>
+
+            <!-- Page Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full text-xs font-bold bg-brandGreen/10 text-brandGreen border border-brandGreen/20 mb-4">
+                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                    Cy's Serialized Articles
+                </span>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slateDark leading-normal sm:leading-relaxed mb-6">
+                    すべての連載・アーカイブ一覧
+                </h1>
+                <p class="text-slate-500 text-base sm:text-lg leading-relaxed">
+                    レガシーな新卒環境に絶望したエンジニアが、あえて年収を下げてモダンスキルへ投資し、高還元SESで年収720万円を回収するまでの実体験とマネーハックの全記録。
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-slate-100 p-1.5 rounded-2xl flex gap-1 border border-slate-200 shadow-inner max-w-md w-full sm:w-auto">
+                    <button id="tab-all" onclick="filterArticles('all')" class="flex-1 sm:flex-initial px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-800 shadow-sm transition-all flex items-center justify-center gap-2">
+                        すべて
+                    </button>
+                    <button id="tab-career" onclick="filterArticles('career')" class="flex-1 sm:flex-initial px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-700 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                        稼ぐ力
+                    </button>
+                    <button id="tab-money" onclick="filterArticles('money')" class="flex-1 sm:flex-initial px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-700 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="wallet" class="w-4 h-4"></i>
+                        増やす仕組み
+                    </button>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articles-grid">
+
+                <!-- Vol.1 (Published) -->
+                <div class="article-card bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="career">
+                    <div>
+                        <div class="relative h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-rose-500/5 to-brandGreen/5"></div>
+                            <div class="text-center relative z-10">
+                                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-md border border-rose-100">
+                                    第1回・公開中
+                                </span>
+                                <h4 class="text-base sm:text-lg font-bold text-slateDark mt-4 leading-snug px-2">
+                                    年収500万スタート。だけど僕が絶望したレガシーな開発環境
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-xs text-slate-400 mb-3 font-semibold">
+                                <span class="text-rose-500">1. 稼ぐ力</span>
+                                <span>•</span>
+                                <span>2026.07.07</span>
+                            </div>
+                            <p class="text-slate-500 text-sm leading-relaxed">
+                                世間的には恵まれていたはずの新卒年収500万円の環境。なぜ私が「このままだと他社で通用しない」と恐怖したのか、理想と現実のギャップを解説。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto border-t border-slate-100/50 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> 読了約3分
+                        </span>
+                        <a id="link-vol001" href="./vol001/" class="text-sm font-bold text-brandGreen flex items-center gap-1 hover:underline">
+                            記事を読む
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vol.2 (Upcoming) -->
+                <div class="article-card bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="career">
+                    <div>
+                        <div class="relative h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100">
+                            <div class="absolute inset-0 bg-slate-100/40"></div>
+                            <div class="text-center relative z-10">
+                                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
+                                    第2回・準備中
+                                </span>
+                                <h4 class="text-base sm:text-lg font-bold text-slate-400 mt-4 leading-snug px-2">
+                                    何をするにも社内承認。外で通用しない30代になる恐怖
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-xs text-slate-400 mb-3 font-semibold">
+                                <span class="text-slate-400">1. 稼ぐ力</span>
+                                <span>•</span>
+                                <span>近日公開</span>
+                            </div>
+                            <p class="text-slate-400/80 text-sm leading-relaxed">
+                                ガチガチの申請フロー、レガシーを死守する組織。新技術の導入を諦め、「会社という箱」の都合に染まっていくエンジニア生活の絶望を描きます。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto border-t border-slate-100/50 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> 読了約4分
+                        </span>
+                        <button onclick="showComingSoonToast('第2回')" class="text-sm font-bold text-slate-400 flex items-center gap-1 hover:text-slate-600 transition-colors">
+                            予告を見る
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Vol.3 (Upcoming) -->
+                <div class="article-card bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="career">
+                    <div>
+                        <div class="relative h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100">
+                            <div class="absolute inset-0 bg-slate-100/40"></div>
+                            <div class="text-center relative z-10">
+                                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
+                                    第3回・準備中
+                                </span>
+                                <h4 class="text-base sm:text-lg font-bold text-slate-400 mt-4 leading-snug px-2">
+                                    あえて年収を下げて飛び込んだ、モダンスキル獲得の現場
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-xs text-slate-400 mb-3 font-semibold">
+                                <span class="text-slate-400">1. 稼ぐ力</span>
+                                <span>•</span>
+                                <span>近日公開</span>
+                            </div>
+                            <p class="text-slate-400/80 text-sm leading-relaxed">
+                                年収500万から460万へ。周囲の反対を押し切って行った「ダウン転職」の真実。ここで手にしたクラウド・DWH技術が一生モノの資産になるまで。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto border-t border-slate-100/50 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> 読了約5分
+                        </span>
+                        <button onclick="showComingSoonToast('第3回')" class="text-sm font-bold text-slate-400 flex items-center gap-1 hover:text-slate-600 transition-colors">
+                            予告を見る
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Vol.4 (Upcoming) -->
+                <div class="article-card bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="career">
+                    <div>
+                        <div class="relative h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100">
+                            <div class="absolute inset-0 bg-slate-100/40"></div>
+                            <div class="text-center relative z-10">
+                                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
+                                    第4回・準備中
+                                </span>
+                                <h4 class="text-base sm:text-lg font-bold text-slate-400 mt-4 leading-snug px-2">
+                                    高還元SESというフロンティア。単価連動で720万を回収した戦略
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-xs text-slate-400 mb-3 font-semibold">
+                                <span class="text-slate-400">1. 稼ぐ力</span>
+                                <span>•</span>
+                                <span>近日公開</span>
+                            </div>
+                            <p class="text-slate-400/80 text-sm leading-relaxed">
+                                「あえて一時的に下げて身につけたスキル」を最高値で売る方法。単価連動モデルを徹底的にハックし、年収720万円へV字回復させた極秘手法。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto border-t border-slate-100/50 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> 読了約6分
+                        </span>
+                        <button onclick="showComingSoonToast('第4回')" class="text-sm font-bold text-slate-400 flex items-center gap-1 hover:text-slate-600 transition-colors">
+                            予告を見る
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Vol.5 (Upcoming) -->
+                <div class="article-card bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="money">
+                    <div>
+                        <div class="relative h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-brandCyan/5 to-brandBlue/5"></div>
+                            <div class="text-center relative z-10">
+                                <span class="text-xs font-bold text-brandCyan bg-cyan-50 px-2.5 py-1 rounded-md border border-cyan-100">
+                                    第5回・準備中
+                                </span>
+                                <h4 class="text-base sm:text-lg font-bold text-slate-400 mt-4 leading-snug px-2">
+                                    データエンジニア流：徹底した家計データベース＆自動投資設計
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-xs text-slate-400 mb-3 font-semibold">
+                                <span class="text-brandCyan">2. 増やす仕組み</span>
+                                <span>•</span>
+                                <span>近日公開</span>
+                            </div>
+                            <p class="text-slate-400/80 text-sm leading-relaxed">
+                                本業最大化で得た高単価キャッシュをどう回すか。スプレッドシートやAPI連携を駆使した家計簿管理と、投資自動化ポートフォリオ。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto border-t border-slate-100/50 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> 読了約5分
+                        </span>
+                        <button onclick="showComingSoonToast('第5回')" class="text-sm font-bold text-slate-400 flex items-center gap-1 hover:text-slate-600 transition-colors">
+                            予告を見る
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Simulated Toast / Modal -->
+    <div id="toast" class="hidden fixed bottom-6 right-6 z-50 max-w-sm bg-slateDark text-white p-4 rounded-2xl shadow-2xl border border-slate-700/50 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-brandGreen/20 flex items-center justify-center text-brandGreen">
+            <i data-lucide="info" class="w-4 h-4"></i>
+        </div>
+        <div>
+            <h5 class="text-xs font-bold" id="toast-title">近日公開予定です</h5>
+            <p class="text-[10px] text-slate-300 mt-0.5">本連載記事は現在執筆中です。公開をお楽しみに！</p>
+        </div>
+        <button onclick="closeToast()" class="text-slate-400 hover:text-white ml-auto">
+            <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="border-t border-slate-200 bg-white text-slate-400 py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center shadow-sm">
+                        <span class="text-white font-extrabold text-sm tracking-wider">Cy</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-700 block leading-tight">Cy's Blog</span>
+                        <span class="text-[10px] text-slate-400 tracking-wider">MODERN CAREER & WEALTH DESIGN</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 text-xs sm:text-sm font-semibold">
+                    <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-slate-600 transition-colors">ホーム</a>
+                    <a href="https://kiyuro.github.io/cy-blog#story" data-config-href="BASE_URL#story" class="hover:text-slate-600 transition-colors">V字回復ストーリー</a>
+                    <a href="https://kiyuro.github.io/cy-blog#diagnose" data-config-href="BASE_URL#diagnose" class="hover:text-slate-600 transition-colors">市場価値診断</a>
+                </div>
+
+                <p class="text-xs text-slate-400">
+                    &copy; 2026 Cy Official Blog. All Rights Reserved.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // ------------------------------------
+        // config.jsから動的にベースURLを注入する処理
+        // ------------------------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof CONFIG !== 'undefined' && CONFIG.BASE_URL) {
+                // 一般リンク書き換え
+                const elements = document.querySelectorAll('[data-config-href]');
+                elements.forEach(el => {
+                    const pathType = el.getAttribute('data-config-href');
+
+                    if (pathType === 'BASE_URL') {
+                        el.href = CONFIG.BASE_URL;
+                    } else if (pathType.startsWith('BASE_URL#')) {
+                        const hash = pathType.split('#')[1];
+                        el.href = `${CONFIG.BASE_URL}#${hash}`;
+                    }
+                });
+
+                // 第1回記事のリンク書き換え（本番用に最適化）
+                const vol1Link = document.getElementById('link-vol001');
+                if (vol1Link) {
+                    vol1Link.href = `${CONFIG.BASE_URL}/articles/vol001/`;
+                }
+            } else {
+                console.warn('config.js が見つからないか、CONFIG変数が定義されていません。ローカル相対パスを使用します。');
+            }
+        });
+
+        // ------------------------------------
+        // Article Filtering Logic
+        // ------------------------------------
+        function filterArticles(category) {
+            const cards = document.querySelectorAll('.article-card');
+
+            const btnAll = document.getElementById('tab-all');
+            const btnCareer = document.getElementById('tab-career');
+            const btnMoney = document.getElementById('tab-money');
+
+            // Reset active states for tabs
+            [btnAll, btnCareer, btnMoney].forEach(btn => {
+                btn.className = "flex-1 sm:flex-initial px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-700 transition-all flex items-center justify-center gap-2";
+            });
+
+            // Set active class
+            const activeBtn = document.getElementById(`tab-${category}`);
+            if (activeBtn) {
+                activeBtn.className = "flex-1 sm:flex-initial px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-800 shadow-sm transition-all flex items-center justify-center gap-2";
+            }
+
+            // Card filter animation
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // ------------------------------------
+        // Toast logic (upcoming notices)
+        // ------------------------------------
+        let toastTimeout;
+        function showComingSoonToast(volName) {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toast-title');
+
+            toastTitle.innerText = `${volName}は執筆準備中です`;
+            toast.classList.remove('hidden');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        function closeToast() {
+            document.getElementById('toast').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
