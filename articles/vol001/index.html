@@ -93,14 +93,6 @@
     <!-- Article Hero Section -->
     <main class="flex-grow py-12 md:py-20">
         <article class="max-w-3xl mx-auto px-4 sm:px-6">
-
-            <!-- Breadcrumb -->
-            <nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-6">
-                <a href="https://kiyuro.github.io/cy-blog" data-config-href="BASE_URL" class="hover:text-brandGreen transition-colors">ホーム</a>
-                <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                <span class="text-slate-600 truncate">【第1回】レガシーな開発環境への絶望</span>
-            </nav>
-
             <!-- Header of the post -->
             <header class="mb-10">
                 <div class="flex items-center gap-2.5 mb-4">
@@ -118,24 +110,8 @@
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slateDark leading-normal sm:leading-relaxed mb-6">
-                    【第1回】年収500万スタート。だけど僕が絶望したレガシーな開発環境
+                    【第1回】年収550万だけど僕が絶望したレガシーな開発環境
                 </h1>
-
-                <!-- Author details -->
-                <div class="flex items-center gap-3 p-4 rounded-2xl bg-slate-100/60 border border-slate-200/50">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brandGreen to-brandCyan flex items-center justify-center font-black text-white text-sm shadow animate-logo">
-                        Cy
-                    </div>
-                    <div>
-                        <div class="text-sm font-bold text-slateDark flex items-center gap-1">
-                            Cy (サイ)
-                            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-brandGreen/10 text-brandGreen border border-brandGreen/20">著者</span>
-                        </div>
-                        <div class="text-xs text-slate-500">30代現役データエンジニア / 本業年収720万円V字回復達成者</div>
-                    </div>
-                </div>
-            </header>
-
             <!-- Main Content Area -->
             <div class="prose prose-slate max-w-none text-slate-700 leading-loose text-base sm:text-lg space-y-8 font-normal">
 
@@ -144,7 +120,7 @@
                 </p>
 
                 <p>
-                    私は現在、30代のデータエンジニアとして年収720万円で働いていますが、ここに至るまでは<strong class="text-slateDark border-b-2 border-brandGreen/40 px-1">「500万 ➔ 460万 ➔ 600万 ➔ 720万」</strong>という、世間一般からは少し歪（いびつ）に見える変わったキャリアチェンジを歩んできました。
+                    私は現在、30代のデータエンジニアとして年収720万円で働いていますが、ここに至るまでは<strong class="text-slateDark border-b-2 border-brandGreen/40 px-1">「550万 ➔ 450万 ➔ 600万 ➔ 720万」</strong>という、世間一般からは少し歪（いびつ）に見える変わったキャリアチェンジを歩んできました。
                 </p>
 
                 <p>
@@ -163,11 +139,11 @@
 
                 <h2 class="text-2xl font-bold text-slateDark flex items-center gap-2 mt-10 mb-6">
                     <span class="w-1.5 h-6 rounded bg-brandGreen"></span>
-                    年収500万という、恵まれたスタート
+                    年収550万という、恵まれたスタート
                 </h2>
 
                 <p>
-                    新卒で入った会社は、最初から<strong>「年収500万円」</strong>という非常に条件の良いものでした。
+                    新卒で入った会社は、入社3年目で<strong>「年収550万円」</strong>という非常に条件の良いものでした。
                 </p>
 
                 <p>
@@ -200,26 +176,18 @@
 
             </div>
 
-            <!-- Footer Area inside article (Next article Only) -->
             <footer class="mt-16 pt-8 border-t border-slate-200">
-                <div class="flex justify-end items-center mb-8">
-                    <a href="https://kiyuro.github.io/cy-blog#articles" data-config-href="BASE_URL#articles" class="text-xs font-bold text-brandGreen hover:underline flex items-center gap-1">
-                        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-                        すべての連載記事一覧
-                    </a>
-                </div>
-
                 <!-- Next Article Preview Card -->
                 <div class="p-6 rounded-2xl bg-gradient-to-tr from-slate-50 to-slate-100/50 border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                     <div class="space-y-1.5">
                         <span class="text-xs font-bold text-brandGreen tracking-widest block uppercase">Next up: 第2回</span>
-                        <h4 class="text-base sm:text-lg font-bold text-slateDark">「何をするにも社内承認。外で通用しない30代になる恐怖」</h4>
+                        <h4 class="text-base sm:text-lg font-bold text-slateDark">「この会社でしか生きられない」という恐怖。僕が感じたキャリアの危機感</h4>
                         <p class="text-xs sm:text-sm text-slate-500">私が「年収を落としてでも抜け出すべきだ」と本気で焦りだした、技術と組織の真実に迫ります。</p>
                     </div>
-                    <button onclick="showComingSoonToast()" class="px-5 py-3 rounded-xl bg-slateDark hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shrink-0 transition-all flex items-center gap-1">
+                    <a href="https://kiyuro.github.io/cy-blog/articles/vol002" data-config-href="BASE_URL/articles/vol002" class="px-5 py-3 rounded-xl bg-slateDark hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shrink-0 transition-all flex items-center gap-1">
                         <span>第2回を読む</span>
                         <i data-lucide="arrow-right" class="w-4 h-4 text-brandCyan"></i>
-                    </button>
+                    </a>
                 </div>
             </footer>
 

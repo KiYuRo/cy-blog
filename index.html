@@ -109,14 +109,14 @@
 
             <!-- Modified leading (line-height) class from leading-tight to leading-normal/relaxed for spacing -->
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-normal sm:leading-normal md:leading-relaxed text-slateDark mb-6">
-                あえて<span class="text-rose-500 underline decoration-rose-400 decoration-wavy underline-offset-8">年収を下げて</span>転職し、<br class="hidden sm:inline">
+                <span class="text-rose-500 underline decoration-rose-400 decoration-wavy underline-offset-8">年収を100万円下げて</span>転職し、<br class="hidden sm:inline">
                 <span class="bg-gradient-to-r from-brandGreen to-brandCyan bg-clip-text text-transparent">モダン技術で720万円</span>へ。<br>
                 リアルな「稼ぎ方＆増やし方」
             </h1>
 
             <p class="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-slate-500 font-normal leading-relaxed mb-10">
                 新卒時代のレガシー環境への強い危機感から、身を削ってスキルへ投資。<br>
-                一時的なダウンから一気に掴み取った「モダンスキル」と「資産形成の知恵」の全貌を、忖度なしで発信します。
+                一時的な年収ダウンから一気に掴み取った「モダンスキル」と「資産形成の知恵」の全貌を、忖度なしで発信します。
             </p>
 
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -173,7 +173,7 @@
                     一時的なダウンは「未来のブースター」だった
                 </h2>
                 <p class="text-slate-500">
-                    新卒時の500万円から、あえて一時的に460万円まで下げてモダンスキルを獲得。<br>
+                    新卒入社後3年目時点の550万円から、あえて一時的に450万円まで下げてモダンスキルを獲得。<br>
                     その決断があったからこそ、一気に720万円へとV字回復を遂げることができました。
                 </p>
             </div>
@@ -208,9 +208,9 @@
                     <!-- Step 1 -->
                     <div class="relative pl-8 border-l-2 border-slate-200 pb-1">
                         <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 border-4 border-white"></div>
-                        <span class="text-xs font-bold text-slate-400">1社目: 新卒時代</span>
+                        <span class="text-xs font-bold text-slate-400">1社目: 新卒入社後3年目</span>
                         <div class="flex justify-between items-center mt-1">
-                            <h4 class="text-lg font-bold text-slateDark">年収 500万円</h4>
+                            <h4 class="text-lg font-bold text-slateDark">年収 550万円</h4>
                             <span class="px-2 py-0.5 rounded text-xs bg-rose-100 text-rose-600 font-bold border border-rose-200">危機感「強」</span>
                         </div>
                         <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">
@@ -223,7 +223,7 @@
                         <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brandCyan border-4 border-white animate-pulse"></div>
                         <span class="text-xs font-bold text-brandCyan">2社目: あえてのダウン転職</span>
                         <div class="flex justify-between items-center mt-1">
-                            <h4 class="text-lg font-bold text-slateDark">年収 460万円</h4>
+                            <h4 class="text-lg font-bold text-slateDark">年収 450万円</h4>
                             <span class="px-2 py-0.5 rounded text-xs bg-cyan-50 text-brandCyan font-bold border border-cyan-200">スキル投資期</span>
                         </div>
                         <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">
@@ -454,7 +454,7 @@
                             <div class="absolute inset-0 bg-gradient-to-tr from-rose-500/5 to-brandGreen/5"></div>
                             <div class="text-center relative z-10">
                                 <span class="text-xs font-bold text-rose-500 bg-rose-50 px-2 py-1 rounded border border-rose-100">キャリア戦略</span>
-                                <h4 class="text-base font-bold text-slateDark mt-3 leading-snug px-2">「目先の給与40万」を捨てて手に入れた10年先も稼げるモダンスキルの本質</h4>
+                                <h4 class="text-base font-bold text-slateDark mt-3 leading-snug px-2">「目先の給与100万」を捨てて手に入れた10年先も稼げるモダンスキルの本質</h4>
                             </div>
                         </div>
                         <div class="p-6">
@@ -606,10 +606,10 @@
         const careerChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['1社目 (新卒)', '2社目 (あえてダウン)', '3社目 (高還元SES)', '現在 (単価連動)'],
+                labels: ['1社目 (新卒3年目)', '2社目 (あえてダウン)', '3社目 (高還元SES)', '現在 (単価アップ)'],
                 datasets: [{
                     label: '年収推移 (万)',
-                    data: [500, 460, 600, 720],
+                    data: [550, 450, 600, 720],
                     borderColor: '#10B981', // brandGreen
                     borderWidth: 4,
                     backgroundColor: 'rgba(16, 185, 129, 0.05)',
