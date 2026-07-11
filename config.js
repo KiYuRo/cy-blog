@@ -1,3 +1,3 @@
 const CONFIG = {
-    BASE_URL: "https://kiyuro.github.io/cy-blog"
+    BASE_URL: "https://cy-data-eng.com/"
 };
