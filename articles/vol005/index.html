@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SES多重下請けマージン推定＆直契約シミュレーター</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Material Icons & Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#16a34a',
+                            600: '#15803d',
+                            700: '#166534',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <header class="mb-8 border-b border-slate-200 pb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+                <div class="flex items-center gap-2 text-emerald-600 font-bold text-sm uppercase tracking-wider mb-1">
+                    <span class="material-icons text-base">insights</span>
+                    <span>商流解剖・キャリア戦略ツール</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">SESマージン推定 ＆ 直契約シミュレーター</h1>
+                <p class="mt-2 text-slate-500 text-sm sm:text-base">
+                    現在の2次請け単価「85万円」をベースに、多重下請けのピンハネ構造とフリーランス直契約時の適正単価を可視化します。
+                </p>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Panel: Input Controls -->
+            <section class="lg:col-span-5 flex flex-col gap-6">
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <span class="material-icons text-emerald-600">settings</span>
+                        <span>前提条件の設定</span>
+                    </h2>
+
+                    <div class="space-y-6">
+                        <!-- 2nd Contractor Price Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-slate-700 flex items-center gap-1.5">
+                                    <span class="material-icons text-slate-400 text-sm">apartment</span>
+                                    <span>所属会社(2次請け)が受け取る金額</span>
+                                </label>
+                                <span class="text-sm font-bold text-slate-900 bg-slate-100 px-2.5 py-0.5 rounded" id="label-2nd-price">85 万円/月</span>
+                            </div>
+                            <input id="param-2nd-price" type="range" min="50" max="150" step="1" value="85" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+                            <span class="text-[11px] text-slate-400 block mt-1">※SESの契約で、所属企業が1次請けから受け取っている現状の月額</span>
+                        </div>
+
+                        <!-- 1st Contractor Margin Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-slate-700 flex items-center gap-1.5">
+                                    <span class="material-icons text-slate-400 text-sm">trending_up</span>
+                                    <span>1次請けのマージン率予想</span>
+                                </label>
+                                <span class="text-sm font-bold text-slate-900 bg-slate-100 px-2.5 py-0.5 rounded" id="label-1st-margin">20 %</span>
+                            </div>
+                            <input id="param-1st-margin" type="range" min="10" max="40" step="5" value="20" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+                            <span class="text-[11px] text-slate-400 block mt-1">※業界平均は15%〜25%（大手・準大手が1次請けの場合は高めになります）</span>
+                        </div>
+
+                        <!-- Direct Contract Reduction Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-slate-700 flex items-center gap-1.5">
+                                    <span class="material-icons text-slate-400 text-sm">handshake</span>
+                                    <span>直契約移行時の減額・手数料率</span>
+                                </label>
+                                <span class="text-sm font-bold text-slate-900 bg-slate-100 px-2.5 py-0.5 rounded" id="label-direct-reduction">10 %</span>
+                            </div>
+                            <input id="param-direct-reduction" type="range" min="0" max="30" step="5" value="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+                            <span class="text-[11px] text-slate-400 block mt-1">※直契約移行にあたって客先から求められる値下げ幅、またはエージェントを1社挟む際のマージン（目安: 5%〜15%）</span>
+                        </div>
+
+                        <!-- Current Employee Income -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-slate-700 flex items-center gap-1.5">
+                                    <span class="material-icons text-slate-400 text-sm">badge</span>
+                                    <span>あなたの現在年収（会社員）</span>
+                                </label>
+                                <span class="text-sm font-bold text-slate-900 bg-slate-100 px-2.5 py-0.5 rounded" id="label-emp-salary">720 万円</span>
+                            </div>
+                            <input id="param-emp-salary" type="range" min="400" max="1200" step="20" value="720" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+                            <span class="text-[11px] text-slate-400 block mt-1">※月換算：約60万円（賞与等も含めた年間総額）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Knowledge -->
+                <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-sm">
+                    <h3 class="font-bold text-base mb-3 flex items-center gap-2">
+                        <span class="material-icons text-amber-400">gavel</span>
+                        <span>直契約を狙う場合の法律的注意</span>
+                    </h3>
+                    <ul class="space-y-3 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-amber-400 font-bold">⚠</span>
+                            <span><strong>商流飛ばしのリスク：</strong> 現在所属している企業の契約書には「1次請けや客先と直接雇用・取引をすることの禁止（引き抜き防止条項）」が含まれていることがほとんどです。トラブルを避けるため、退職後半年〜1年は別経由で契約する等の対策が必要です。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 font-bold">✔</span>
+                            <span><strong>エンド直エージェントの賢い利用：</strong> 客先と完全に個人で直接契約（口座開設）をすることは与信上難しい場合が多いため、マージンが10%程度と非常に低い「エンド直結型エージェント」を1社だけ挟むのが、現代のエンジニアにとって最も一般的で安全な独立方法です。</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Right Panel: Results & Visualization -->
+            <section class="lg:col-span-7 flex flex-col gap-6">
+                <!-- Stat Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Estimated Client Budget -->
+                    <div class="bg-slate-100 rounded-2xl border border-slate-200 p-5 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-slate-600 block">客先の想定支払額</span>
+                            <span class="text-2xl font-extrabold text-slate-900 mt-1 block" id="hud-client-budget">--- 万円</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 mt-2">（エンドクライアントの予算総額）</span>
+                    </div>
+
+                    <!-- 1st Contractor Cut -->
+                    <div class="bg-rose-50 rounded-2xl border border-rose-100 p-5 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-rose-800 block">1次請けの中抜き額</span>
+                            <span class="text-2xl font-extrabold text-rose-600 mt-1 block" id="hud-1st-cut">--- 万円/月</span>
+                        </div>
+                        <span class="text-[10px] text-rose-700 mt-2">紹介・仲介料として引かれている月額</span>
+                    </div>
+
+                    <!-- Direct Contract Target -->
+                    <div class="bg-emerald-50 rounded-2xl border border-emerald-100 p-5 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-800 block">直契約時の想定月単価</span>
+                            <span class="text-2xl font-extrabold text-emerald-600 mt-1 block" id="hud-direct-price">--- 万円/月</span>
+                        </div>
+                        <span class="text-[10px] text-emerald-700 mt-2">個人事業主として直取引した場合の目安</span>
+                    </div>
+                </div>
+
+                <!-- Flow Visualizer -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4">現在のマージン搾取構造（多重下請け）</h3>
+
+                    <div class="space-y-4">
+                        <!-- Client -->
+                        <div class="flex items-center justify-between p-3 bg-slate-100 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <span class="material-icons text-slate-500">storefront</span>
+                                <span class="font-bold text-sm text-slate-700">エンドクライアント (客先)</span>
+                            </div>
+                            <span class="font-extrabold text-slate-900" id="flow-client-budget">--- 万円</span>
+                        </div>
+
+                        <div class="flex justify-center my-1">
+                            <span class="material-icons text-rose-500">arrow_downward</span>
+                            <span class="text-xs text-rose-600 font-semibold ml-1" id="flow-1st-margin-percent">中抜き 20% (--- 万円)</span>
+                        </div>
+
+                        <!-- 1st Agency -->
+                        <div class="flex items-center justify-between p-3 bg-rose-50 border border-rose-200 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <span class="material-icons text-rose-500">link</span>
+                                <span class="font-bold text-sm text-rose-800">1次請け企業 (SES・SIer)</span>
+                            </div>
+                            <span class="font-extrabold text-rose-700" id="flow-1st-received">--- 万円</span>
+                        </div>
+
+                        <div class="flex justify-center my-1">
+                            <span class="material-icons text-slate-400">arrow_downward</span>
+                            <span class="text-xs text-slate-500 ml-1">所属企業の取り分（社会保険料・営業利益など）</span>
+                        </div>
+
+                        <!-- 2nd Agency (Your current company) -->
+                        <div class="flex items-center justify-between p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <span class="material-icons text-emerald-500">business</span>
+                                <span class="font-bold text-sm text-emerald-800">あなたの所属会社 (2次請け・現在の単価)</span>
+                            </div>
+                            <span class="font-extrabold text-emerald-700" id="flow-2nd-received">--- 万円</span>
+                        </div>
+
+                        <div class="flex justify-center my-1">
+                            <span class="material-icons text-slate-400">arrow_downward</span>
+                            <span class="text-xs text-slate-500 ml-1" id="flow-emp-cost-percent">給与支払い率 (--- %)</span>
+                        </div>
+
+                        <!-- You -->
+                        <div class="flex items-center justify-between p-3 bg-emerald-600 text-white rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <span class="material-icons text-white">person</span>
+                                <span class="font-bold text-sm">あなた (会社員給料・月換算)</span>
+                            </div>
+                            <span class="font-extrabold text-white" id="flow-your-salary">--- 万円</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Chart -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">手取り・収益性のシミュレーション比較</h3>
+                    <p class="text-slate-500 text-xs mb-4">同じ現場で働きながら「商流」を変えた場合の手元に残る金額の差</p>
+                    <div class="relative w-full h-[280px]">
+                        <canvas id="margin-comparison-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        let chartInstance = null;
+
+        function runCalculations() {
+            // Inputs
+            const secondPrice = parseFloat(document.getElementById('param-2nd-price').value);
+            const firstMarginPercent = parseFloat(document.getElementById('param-1st-margin').value) / 100;
+            const directReductionPercent = parseFloat(document.getElementById('param-direct-reduction').value) / 100;
+            const empSalaryAnnual = parseFloat(document.getElementById('param-emp-salary').value);
+            const empSalaryMonthly = empSalaryAnnual / 12;
+
+            // Labels Update
+            document.getElementById('label-2nd-price').textContent = secondPrice + " 万円/月";
+            document.getElementById('label-1st-margin').textContent = (firstMarginPercent * 100) + " %";
+            document.getElementById('label-direct-reduction').textContent = (directReductionPercent * 100) + " %";
+            document.getElementById('label-emp-salary').textContent = empSalaryAnnual + " 万円";
+
+            // 1. 客先の想定支払額 (Client Budget) = 2次請け単価 / (1 - 1次請けマージン率)
+            const clientBudget = secondPrice / (1 - firstMarginPercent);
+
+            // 2. 1次請けの中抜き額
+            const firstCut = clientBudget - secondPrice;
+
+            // 3. 直契約した時の想定単価（入力された減額・手数料率を適用）
+            const directTarget = clientBudget * (1 - directReductionPercent);
+
+            // パターンB: 通常のフリーランスエージェント（一律15%引いた参考用、または直接契約より少し安全なマージン等として固定表示）
+            const agentTarget = clientBudget * 0.90;
+
+            // UI HUD Update
+            document.getElementById('hud-client-budget').textContent = clientBudget.toFixed(1) + " 万円";
+            document.getElementById('hud-1st-cut').textContent = firstCut.toFixed(1) + " 万円";
+            document.getElementById('hud-direct-price').textContent = directTarget.toFixed(1) + " 万円";
+
+            // Flow Diagram Update
+            document.getElementById('flow-client-budget').textContent = clientBudget.toFixed(1) + " 万円";
+            document.getElementById('flow-1st-margin-percent').textContent = `中抜き ${(firstMarginPercent * 100).toFixed(0)}% (${firstCut.toFixed(1)} 万円)`;
+            document.getElementById('flow-1st-received').textContent = secondPrice.toFixed(1) + " 万円";
+            document.getElementById('flow-2nd-received').textContent = secondPrice.toFixed(1) + " 万円";
+
+            const salaryPayoutRatio = (empSalaryMonthly / secondPrice) * 100;
+            document.getElementById('flow-emp-cost-percent').textContent = `還元率 ${salaryPayoutRatio.toFixed(1)}%`;
+            document.getElementById('flow-your-salary').textContent = empSalaryMonthly.toFixed(1) + " 万円";
+
+            // Chart Update
+            updateChart(empSalaryMonthly, secondPrice, agentTarget, directTarget);
+        }
+
+        function updateChart(currentSalary, currentPrice, agentPrice, directPrice) {
+            const ctx = document.getElementById('margin-comparison-chart').getContext('2d');
+
+            // Approximate Net Income (Company employee = ~75% payout, Freelance = ~70% after tax/Shaho, but with expenses)
+            const employeeNet = currentSalary * 0.75;
+            // For freelance, we assume they utilize expenses so actual disposable value is higher
+            const freelanceAgentNet = agentPrice * 0.70;
+            const freelanceDirectNet = directPrice * 0.70;
+
+            const chartData = {
+                labels: ['現在の会社員給料', '所属企業の受取額', 'エージェント直案件(フリーランス)', '完全直契約(フリーランス)'],
+                datasets: [
+                    {
+                        label: '額面金額 (万円/月)',
+                        data: [currentSalary, currentPrice, agentPrice, directPrice],
+                        backgroundColor: '#cbd5e1',
+                        borderRadius: 6,
+                    },
+                    {
+                        label: '実質手取り推定 (万円/月)',
+                        data: [employeeNet, null, freelanceAgentNet, freelanceDirectNet],
+                        backgroundColor: '#10b981',
+                        borderRadius: 6,
+                    }
+                ]
+            };
+
+            if (chartInstance) {
+                chartInstance.data = chartData;
+                chartInstance.update();
+            } else {
+                chartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        family: 'Inter, Noto Sans JP',
+                                        size: 11
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: '金額 (万円/月)',
+                                    font: {
+                                        family: 'Inter, Noto Sans JP',
+                                        size: 11
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        window.onload = function() {
+            const sliders = ['param-2nd-price', 'param-1st-margin', 'param-direct-reduction', 'param-emp-salary'];
+            sliders.forEach(id => {
+                document.getElementById(id).addEventListener('input', runCalculations);
+            });
+            runCalculations();
+        };
+    </script>
+</body>
+</html>
