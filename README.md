@@ -3,7 +3,7 @@
 ## 🌐 公開URL
 * **本番トップページ**: https://kiyuro.github.io/cy-blog
 * **記事一覧**: https://kiyuro.github.io/cy-blog/articles/
-* **記事一覧**: https://kiyuro.github.io/cy-blog/reviews/
+* **サービス一覧**: https://kiyuro.github.io/cy-blog/reviews/
 
 ## 📁 ディレクトリ構成
 ```text
